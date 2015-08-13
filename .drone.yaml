@@ -1,0 +1,5 @@
+image: alpine
+env:
+  - abc=xyz
+script:
+  - echo $abc
