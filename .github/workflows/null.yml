@@ -7,7 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: Run a multi-line script
+    - name: build and push
       run: |
-        docker login docker.pkg.github.com -u yikaus -p $pgk_token
-        
+        docker login docker.pkg.github.com -u yikaus -p ${{ secrets.pkg_token }}
+        docker build -t docker.pkg.github.com/$GITHUB_REPOSITORY/null:$GITHUB_SHA .
+        docker push docker.pkg.github.com/$GITHUB_REPOSITORY/null:$GITHUB_SHA
