@@ -1,5 +1,10 @@
-image: alpine
-env:
-  - abc=xyz
-script:
-  - echo $abc
+---
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: test
+  image: alpine
+  commands:
+  - echo ok
