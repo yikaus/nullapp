@@ -1,14 +1,20 @@
-name: CI
+name: nullapp
 
-on: [push]
+on:
+  push:
+    # Trigger this workflow only on commits pushed to the main branch
+    branches:
+      - master
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: build and push
-      run: |
-        docker login docker.pkg.github.com -u yikaus -p ${{ secrets.pkg_token }}
-        docker build -t docker.pkg.github.com/$GITHUB_REPOSITORY/null:$GITHUB_SHA .
-        docker push docker.pkg.github.com/$GITHUB_REPOSITORY/null:$GITHUB_SHA
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Dagger
+        uses: dagger/dagger-for-github@v3
+        with:
+          cmds: do test
