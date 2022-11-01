@@ -17,4 +17,7 @@ jobs:
         name: Dagger
         uses: dagger/dagger-for-github@v3
         with:
-          cmds: do test
+          cmds: |
+            project init
+            project update
+            do test
